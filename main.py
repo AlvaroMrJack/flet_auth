@@ -4,11 +4,11 @@ import flet
 from flet import Card, ElevatedButton, LoginEvent, Page, Column, Alignment, Container
 from flet.auth.providers import GitHubOAuthProvider, GoogleOAuthProvider
 
-GOOGLE_CLIENT_ID="171891063673-t2am4875dim7eibe8fev5tupj5l8g70g.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET="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"
+GOOGLE_CLIENT_ID="xxx"
+GOOGLE_CLIENT_SECRET="xxx"
 
-GITHUB_CLIENT_ID="984e6abcb56d8960fd56"
-GITHUB_CLIENT_SECRET="26fc21fa137f2a72b76be7656d9fa091f8a00aeb"
+GITHUB_CLIENT_ID="xxx"
+GITHUB_CLIENT_SECRET="xxx"
 
 REDIRECT_URL="http://127.0.0.1:8550/api/oauth/redirect"
 
