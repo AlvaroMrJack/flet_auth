@@ -94,7 +94,6 @@ def main(page: Page):
         ],
     )
     
-    
     toggle_login_buttons()
     
     page.on_login = on_login
@@ -117,5 +116,65 @@ def main(page: Page):
     #         )
     #     )
     # )
+        
+    def route_change(route):
+        page.views.clear()
+        page.views.append(
+            flet.View(
+                "/",
+                [
+                    flet.Row(
+                        [                
+                            flet.Column(
+                                [
+                                    flet.Container(
+                                        content=flet.Column(
+                                            [
+                                                flet.Text(
+                                                    "Login",
+                                                    size=24,
+                                                    color=flet.colors.BLACK,
+                                                    weight=flet.FontWeight.BOLD),
+                                                login_google_button,
+                                                login_github_button
+                                            ],
+                                            alignment=flet.MainAxisAlignment.CENTER
+                                        ),
+                                        bgcolor=flet.colors.WHITE,
+                                        height=200,
+                                        padding=20,
+                                        border_radius=20,
+                                        margin=100,
+                                    ),
+                                ]
+                            ),
+                        ],
+                        alignment=flet.MainAxisAlignment.CENTER,
+                    ), 
+                ],
+            )
+        )
+        if page.route == "/store":
+            page.views.append(
+                flet.View(
+                    "/store",
+                    [
+                        flet.AppBar(title=flet.Text("Store"), bgcolor=flet.colors.SURFACE_VARIANT),
+                        flet.ElevatedButton("Go Home", on_click=lambda _: page.go("/")),
+                    ],
+                )
+            )
+        page.update()
 
+    def view_pop(view):
+        page.views.pop()
+        top_view = page.views[-1]
+        page.go(top_view.route)
+    
+    page.title = "Routes Example"    
+    page.vertical_alignment = flet.MainAxisAlignment.CENTER
+    page.on_route_change = route_change
+    page.on_view_pop = view_pop
+    page.go(page.route)
+    
 flet.app(target=main, port=8550, view=flet.WEB_BROWSER)
