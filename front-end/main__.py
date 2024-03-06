@@ -4,11 +4,17 @@ import flet
 from flet import Card, ElevatedButton, LoginEvent, Page, Column, Alignment, Container
 from flet.auth.providers import GitHubOAuthProvider, GoogleOAuthProvider
 
-GOOGLE_CLIENT_ID="xxx"
-GOOGLE_CLIENT_SECRET="xxx"
+# GOOGLE_CLIENT_ID="xxx"
+# GOOGLE_CLIENT_SECRET="xxx"
 
-GITHUB_CLIENT_ID="xxx"
-GITHUB_CLIENT_SECRET="xxx"
+# GITHUB_CLIENT_ID="xxx"
+# GITHUB_CLIENT_SECRET="xxx"
+
+GOOGLE_CLIENT_ID="171891063673-t2am4875dim7eibe8fev5tupj5l8g70g.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="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"
+
+GITHUB_CLIENT_ID="984e6abcb56d8960fd56"
+GITHUB_CLIENT_SECRET="26fc21fa137f2a72b76be7656d9fa091f8a00aeb"
 
 REDIRECT_URL="http://127.0.0.1:8550/api/oauth/redirect"
 
@@ -86,8 +92,7 @@ def main(page: Page):
                     ),
                     flet.PopupMenuItem(
                         text="Logout",
-                        on_click=logout_button_click,
-                        
+                        on_click=logout_button_click
                     )
                 ]
             ),
@@ -136,7 +141,8 @@ def main(page: Page):
                                                     color=flet.colors.BLACK,
                                                     weight=flet.FontWeight.BOLD),
                                                 login_google_button,
-                                                login_github_button
+                                                login_github_button,
+                                                logout_button
                                             ],
                                             alignment=flet.MainAxisAlignment.CENTER
                                         ),
@@ -171,7 +177,23 @@ def main(page: Page):
         top_view = page.views[-1]
         page.go(top_view.route)
     
-    page.title = "Routes Example"    
+    page.title = "Routes Example"
+    page.navigation_bar = flet.CupertinoNavigationBar(
+        bgcolor=flet.colors.AMBER_100,
+        inactive_color=flet.colors.GREY,
+        active_color=flet.colors.BLACK,
+        on_change=lambda e: print("Selected tab:", e.control.selected_index),
+        destinations=[
+            flet.NavigationDestination(icon=flet.icons.EXPLORE, label="Explore"),
+            flet.NavigationDestination(icon=flet.icons.COMMUTE, label="Commute"),
+            flet.NavigationDestination(
+                icon=flet.icons.BOOKMARK_BORDER,
+                selected_icon=flet.icons.BOOKMARK,
+                label="Explore",
+            ),
+        ]
+    )
+    
     page.vertical_alignment = flet.MainAxisAlignment.CENTER
     page.on_route_change = route_change
     page.on_view_pop = view_pop
